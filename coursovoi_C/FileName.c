@@ -11,6 +11,7 @@ double derivative(double x);
 double find_min_max(double start, double finish, double step);  
 double find_x_for_y(double y, double prec, double start, double finish);
 void save_table_to_file(double start, double finish, double step);
+void print_table(double start, double finish, double step);
 
 
 int main() {
@@ -54,16 +55,7 @@ int main() {
 				printf("Ошибка: шаг должен быть положительным!\n");
 				break;
 			}
-
-			printf("|     x     |    f(x)  |\n");
-			printf("|___________|__________|\n");
-
-			for (double x = start; x <= finish+step/2; x += step) {
-				double fx = f(x);
-				if (x >= start && x <= finish) {
-					printf("|%10.4lf |%10.4lf|\n", x, fx);
-				}
-			}
+			print_table(start, finish, step);
 			break;
 		}
 		case 3: {
@@ -224,4 +216,15 @@ void save_table_to_file(double start, double finish, double step) {
 	}
 	fclose(file);
 	printf("Таблица успешно сохранена в файл '%s'\n", filename);
+}
+void print_table(double start, double finish, double step) {
+	printf("|     x     |    f(x)  |\n");
+	printf("|___________|__________|\n");
+
+	for (double x = start; x <= finish+step/2; x += step) {
+		double fx = f(x);
+		if (x >= start && x <= finish) {
+			printf("|%10.4lf |%10.4lf|\n", x, fx);
+		}
+	}
 }
